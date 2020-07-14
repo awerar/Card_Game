@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "261459560860",
+    "firebase_url": "https://card-game-8f61d.firebaseio.com",
+    "project_id": "card-game-8f61d",
+    "storage_bucket": "card-game-8f61d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:261459560860:android:d7fddc107a3e10c03be059",
+        "android_client_info": {
+          "package_name": "awerar.card_game"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "261459560860-l7iq39iftguv2h2sude51u39ceg7cvmq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpeZC_9sB7Hj6qqeoI06OzhJhzzhTPz2U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "261459560860-l7iq39iftguv2h2sude51u39ceg7cvmq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:261459560860:android:80638c07653691e23be059",
+        "android_client_info": {
+          "package_name": "awerar.new_card_game"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "261459560860-l7iq39iftguv2h2sude51u39ceg7cvmq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpeZC_9sB7Hj6qqeoI06OzhJhzzhTPz2U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "261459560860-l7iq39iftguv2h2sude51u39ceg7cvmq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
