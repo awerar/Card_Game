@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>261459560860-1jgn5hplecb8j76phk6lidl7sjav76pn.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.261459560860-1jgn5hplecb8j76phk6lidl7sjav76pn</string>
+	<key>API_KEY</key>
+	<string>AIzaSyClqZSMuxzxlL2FSSkveW6o3syPgTUfvx0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>261459560860</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>awerar.new-card-game</string>
+	<key>PROJECT_ID</key>
+	<string>card-game-8f61d</string>
+	<key>STORAGE_BUCKET</key>
+	<string>card-game-8f61d.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:261459560860:ios:f7ce3b977c8424803be059</string>
+	<key>DATABASE_URL</key>
+	<string>https://card-game-8f61d.firebaseio.com</string>
+</dict>
+</plist>
