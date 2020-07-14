@@ -227,7 +227,7 @@ class BoxGamePage extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2
-                    .copyWith(inherit: true, color: colorScheme.onPrimary),
+                    .copyWith(inherit: true, color: colorScheme.onPrimary, fontSize: 20),
               ),
             ],
           )),
