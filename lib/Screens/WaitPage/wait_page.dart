@@ -56,7 +56,7 @@ class WaitPage extends StatelessWidget {
     List<List<CardModel>> newHands = gameModel.players.map((e) => <CardModel>[]).toList(growable: false);
 
     Random rand = Random();
-    for(int i = 0; deck.length > 0; i = (i + 1) % gameModel.players.length) {
+    for (int i = 0; deck.length > 0; i = (i + 1) % gameModel.players.length) {
       int r = rand.nextInt(deck.length);
       newHands[i].add(deck[r]);
       deck.removeAt(r);

@@ -34,6 +34,7 @@ class Player {
       "is_owner": isOwner,
       "id": id,
       "hand": _hand.map((card) => card.encode()).toList(growable: false),
+      "do_vibrate": false
     };
   }
 

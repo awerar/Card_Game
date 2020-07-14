@@ -8,6 +8,7 @@ import 'package:new_card_game/Screens/EndPage/end_page.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
+import 'package:vibration/vibration.dart';
 
 import 'card_model.dart';
 
@@ -40,7 +41,8 @@ class GameModel extends ChangeNotifier {
       "players": [you.encode()],
       "started": false,
       "ended": false,
-      "placed_cards":[]
+      "placed_cards":[],
+      "player_vibrate": -1
     });
     _beginListen();
   }
@@ -58,7 +60,7 @@ class GameModel extends ChangeNotifier {
   }
 
   void _beginListen() {
-    _gameListener = gameDocument.snapshots().listen((snapshot) {
+    _gameListener = gameDocument.snapshots().listen((snapshot) async {
       if (!snapshot.exists ){
         Navigator.of(context).popUntil((route) => route.isFirst);
         _gameListener.cancel();
@@ -69,7 +71,9 @@ class GameModel extends ChangeNotifier {
       for(Player player in (snapshot.data["players"] as List<dynamic>).map((v) => Map<String, dynamic>.from(v)).map((data) => Player.fromData(data: data))) {
         _players[player.id] = player;
       }
-      if (snapshot.data.containsKey("current_player")) currentPlayer = snapshot.data["current_player"];
+      if (snapshot.data.containsKey("current_player")) {
+        currentPlayer = snapshot.data["current_player"];
+      }
       if (snapshot.data.containsKey("penalty_player")) penaltyPlayer = snapshot.data["penalty_player"];
       if (snapshot.data.containsKey("last_card")) lastCard = CardModel.fromData(data: snapshot.data["last_card"]);
       _placedCards = (snapshot.data["placed_cards"] as List<dynamic>).map((v) => Map<String, dynamic>.from(v)).map((data) => CardModel.fromData(data: data)).toList();
@@ -107,7 +111,21 @@ class GameModel extends ChangeNotifier {
             )
         );
       }
+
+      if (snapshot.data["player_vibrate"] == players.indexOf(you)) {
+        doVibrate();
+        gameDocument.updateData({
+          "player_vibrate": -1
+        });
+      }
     });
+  }
+
+  void doVibrate() async {
+    if (await Vibration.hasVibrator()) {
+      if (await Vibration.hasAmplitudeControl()) Vibration.vibrate(amplitude: 50, duration: 250);
+      else Vibration.vibrate(duration: 250);
+    }
   }
 
   Future<void> leaveGame() async {
@@ -160,7 +178,8 @@ class GameModel extends ChangeNotifier {
   void begin() {
     gameDocument.updateData({
       "started": true,
-      "current_player": players.indexWhere((player) => player.hand.contains(CardModel(type: CardType.Diamonds, value: 8)))
+      "current_player": players.indexWhere((player) => player.hand.contains(CardModel(type: CardType.Diamonds, value: 8))),
+      "player_vibrate": players.indexWhere((player) => player.hand.contains(CardModel(type: CardType.Diamonds, value: 8)))
     });
   }
 
@@ -184,7 +203,8 @@ class GameModel extends ChangeNotifier {
     notifyListeners();
 
     gameDocument.updateData({
-      "current_player": currentPlayer
+      "current_player": currentPlayer,
+      "player_vibrate": currentPlayer
     });
   }
 
@@ -196,7 +216,8 @@ class GameModel extends ChangeNotifier {
     notifyListeners();
     gameDocument.updateData({
       "penalty_player": penaltyPlayer,
-      "current_player": currentPlayer
+      "current_player": currentPlayer,
+      "player_vibrate": currentPlayer
     });
   }
 
@@ -209,7 +230,7 @@ class GameModel extends ChangeNotifier {
   }
 
   bool canPlaceCard(CardModel card) {
-    return  card.value == 8 || placedCards.contains(CardModel(type: card.type, value: card.value - 1)) || placedCards.contains(CardModel(type: card.type, value: card.value + 1));
+    return  card.value == 8 || card.value == 7 && placedCards.contains(CardModel(type: card.type, value: 8)) || (card.value != 8 && card.value != 7 && placedCards.contains(CardModel(type: card.type, value: 8)) && placedCards.contains(CardModel(type: card.type, value: 7)) && (placedCards.contains(CardModel(type: card.type, value: card.value - 1)) || placedCards.contains(CardModel(type: card.type, value: card.value + 1))));
   }
 
   void endGame() async {
